@@ -1,0 +1,31 @@
+<div class="container" *ngIf="account">
+  <h2>Detalles de la Cuenta</h2>
+  <p><strong>Titular:</strong> {{ account.holderName }}</p>
+  <p><strong>Número de Cuenta:</strong> {{ account.accountNumber }}</p>
+  <p><strong>Saldo:</strong> ${{ account.balance }}</p>
+
+  <h3>Transacciones</h3>
+  <ul>
+    <li *ngFor="let transaction of transactions">
+      <div>
+        {{ transaction.type }} - ${{ transaction.amount }} - {{ transaction.date }}
+      </div>
+    </li>
+  </ul>
+
+  <h3>Nueva Transacción</h3>
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmitTransaction()">
+    <div class="form-group">
+      <label for="type">Tipo:</label>
+      <select id="type" formControlName="type">
+        <option value="deposit">Depósito</option>
+        <option value="withdrawal">Retiro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="amount">Monto:</label>
+      <input type="number" id="amount" formControlName="amount" step="0.01" required>
+    </div>
+    <button type="submit" [disabled]="transactionForm.invalid">Agregar Transacción</button>
+  </form>
+</div>

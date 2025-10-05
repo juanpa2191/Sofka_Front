@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Cuentas de Ahorro</h2>
+  <ul>
+    <li *ngFor="let account of accounts" (click)="viewAccount(account.id)">
+      <div>
+        <strong>{{ account.holderName }}</strong> - {{ account.accountNumber }} - Saldo: ${{ account.balance }}
+      </div>
+    </li>
+  </ul>
+</div>
